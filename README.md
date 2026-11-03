@@ -17,6 +17,7 @@ This project investigates that question by assembling match and manager-change d
 | [CI_Analysis.ipynb](CI_Analysis.ipynb) | Estimators, bootstrap analysis, treatment-permutation checks, and saved results |
 | [CI_Data_Builder.ipynb](CI_Data_Builder.ipynb) | Fixture enrichment, league-table reconstruction, and construction of team-level analysis windows |
 | [data.zip](data.zip) | Packaged project data; extract before running the notebooks |
+| [rerun/](rerun/) | Seeded rerun with league points as the outcome and team-level bootstrap intervals; reproduces its committed results exactly and is the version behind the forest plot |
 
 For a quick review, open the saved outputs in `CI_Analysis.ipynb` and the results table below. Running the full resampling comparison is optional.
 
