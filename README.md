@@ -6,7 +6,7 @@ Football clubs often replace their manager after a run of poor results. If perfo
 
 This project investigates that question by assembling match and manager-change data, constructing pre/post performance windows, and comparing several approaches to estimating treatment effects.
 
-**Main finding:** the saved results depend substantially on the estimator. The difference-in-differences specification produces a positive estimated change in the project's composite outcome, while most other bootstrap intervals include zero. The analysis provides an exploratory comparison of methods rather than a definitive answer about the benefit of changing managers. So it probably isn't worth the cost, but that's my personal bias. 
+**Main finding:** teams that replace their manager have usually just had a bad run, and most of their later improvement is a rebound. In the seeded rerun ([rerun/](rerun/)), comparing the change in points suggests a gain of about 3 to 5 points over nine matches, but comparison teams that started as badly gained 3.7 points with no change of manager. Estimators that compare points afterwards give 0.9 to 1.9 points, and none of their 95% intervals excludes zero, so the data are consistent with a small benefit and equally with none.
 
 **Tools:** Python, pandas, NumPy, scikit-learn, statsmodels, XGBoost, EconML, and Matplotlib.
 
@@ -200,11 +200,11 @@ Review file locations, date formats, annotations, and intermediate transitions b
 ## Limitations and reproducibility
 
 - **Non-random treatment and unobserved confounding.** Injuries, dressing-room dynamics, board decisions, media pressure, and other unmeasured circumstances can influence both managerial changes and performance.
-- **Outcome definition.** The composite score is hand-built and mixes performance with context. In the builder, the opponent-rating term is divided by 5 before treatment and by 4 afterwards. A consistent pre/post definition and a points-only outcome are important sensitivity checks before interpreting change-based effects.
+- **Outcome definition.** The composite score is hand-built and mixes performance with context. In the builder, the opponent-rating term is divided by 5 before treatment and by 4 afterwards. A consistent pre/post definition and a points-only outcome are important sensitivity checks before interpreting change-based effects. Fixed in [rerun/](rerun/).
 - **Temporal alignment.** FIFA attributes are joined by closest update date, which may be after the fixture. Window construction also needs checks for season boundaries, repeated replacements, and sufficient matches on both sides of the reference date.
 - **Comparison-group assumptions.** Propensity weighting and matching depend on observed covariates and adequate overlap; DiD additionally requires a credible parallel-trends argument. Comparing several estimators does not itself validate these assumptions.
-- **Dependence between observations.** The bootstrap resamples rows rather than clubs or seasons, and label shuffling is unrestricted. Neither procedure explicitly preserves the team/season dependence structure.
-- **Stochastic workflow.** Control-date sampling, bootstrapping, and permutations are not assigned fixed seeds. Exact outputs can change between runs. The permutation helper skips failed fits, so its tail fraction is based on successful shuffles.
+- **Dependence between observations.** The bootstrap resamples rows rather than clubs or seasons, and label shuffling is unrestricted. Neither procedure explicitly preserves the team/season dependence structure. Fixed in [rerun/](rerun/) for the bootstrap, which resamples whole teams.
+- **Stochastic workflow.** Control-date sampling, bootstrapping, and permutations are not assigned fixed seeds. Exact outputs can change between runs. The permutation helper skips failed fits, so its tail fraction is based on successful shuffles. Fixed in [rerun/](rerun/) for the bootstrap, which uses a fixed seed.
 - **Historical environment.** The notebooks retain Colab-specific paths and outputs without a locked dependency environment. The displayed results are useful for inspection, but a fresh end-to-end reproduction requires the path and data-preparation steps above.
 
 ## Project contribution

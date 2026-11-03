@@ -1,5 +1,7 @@
 # Seeded rerun of the manager-replacement analysis
 
+**What this shows.** Teams that replaced their manager had averaged 6.6 points in the nine matches before the change, against 13.5 for the comparison windows. Comparing the change in points gives 5.1 points (difference-in-differences; 3.0 with IPW weighting), but comparison windows that also started with eight points or fewer gained 3.7 points with no change of manager, so most of that is a rebound. Estimators that compare points afterwards give 0.9 to 1.9 points, and the regression on starting form gives 1.0 point (95% team-level interval -1.0 to 3.0). This folder is the evidence trail for those numbers: `rerun.py` regenerates `results.csv` exactly in about five minutes.
+
 Reruns the estimators from `CI_Analysis.ipynb` (the functions are loaded unchanged from the notebook) and adds the
 following. The notebook and its original saved outputs are not modified.
 
